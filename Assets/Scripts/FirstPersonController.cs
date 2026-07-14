@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
@@ -52,8 +53,38 @@ public class FirstPersonController : MonoBehaviour
         Ray ray = new Ray(_playerCamera.transform.position, _playerCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance, interactableLayer))
         {
-            Debug.Log($"Interacted with: {hit.collider.gameObject.name}");
-            interactText.text = $"Use {hit.collider.gameObject.name}";
+            string objName = hit.collider.gameObject.name;
+
+            interactText.text = $"Use {objName}";
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                switch (objName)
+                {
+                    case "Door to Level 1":
+                        SceneManager.LoadScene("Level 1");
+                        break;
+                    case "Door to Outside":
+                        SceneManager.LoadScene("Level 0");
+                        break;
+                    case "Elevator Up":
+                        if (SceneManager.GetActiveScene().name == "Level 1")
+                        {
+                            SceneManager.LoadScene("Level 2");
+                        }
+                        break;
+                    case "Elevator Down":
+                        if (SceneManager.GetActiveScene().name == "Level 2")
+                        {
+                            SceneManager.LoadScene("Level 1");
+                        }
+                        break;
+                    default:
+                        Debug.LogError($"Unknown interactable: {objName}");
+                        break;
+                }
+
+            }
         }
         else
         {
