@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b76ab58598b76d74885888e6a07a713d
+guid: f732928c7f051944a955c56dd3ea3db9
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
@@ -7,33 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Building
-    second: {fileID: 2100000, guid: c731e04e0a4fefe4aa28d67f21d685c6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Fence
-    second: {fileID: 2100000, guid: 098164327d548e74289f95317fa6a6a7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Floor 1 canvas
     second: {fileID: 2100000, guid: ddaf51139b5148744bfac6ab34495205, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ground
-    second: {fileID: 2100000, guid: e271e29516a63764c96112666a32ac27, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: aeb458971c26dd74dbe1cb84c0f28e27, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Treeline
-    second: {fileID: 2100000, guid: c5c99dd8f8bd16d4186f94479ae2a6e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
