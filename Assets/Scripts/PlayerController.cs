@@ -1,77 +1,96 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class FirstPersonController : MonoBehaviour
 {
-    //action variables
-    private InputAction moveIA;
-    private InputAction lookIA;
-    //camera
-    private GameObject cam;
-    //move input active
-    private bool moving = false;
-    //character controller component
-    private CharacterController charCont;
-    //look coroutine in progress?
-    private bool lcip = false;
+    [Header("Movement")]
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 8f;
+    public float crouchSpeed = 3f;
+    public float jumpHeight = 1.5f;
+    public float gravity = -9.81f;
+    public float crouchTransitionSpeed = 10f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Mouse Look")]
+    public Camera playerCamera;
+    public float mouseSensitivity = 200f;
+    public float maxLookAngle = 90f;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private float xRotation = 0f;
+    private Transform standingCameraPos;
+    private Transform crouchingCameraPos;
+    private bool isCrouching;
+
     void Start()
     {
-        cam = GameObject.Find("Player/Main Camera");
-        charCont = this.GetComponent<CharacterController>();
-        moveIA = InputSystem.actions.FindAction("Character/Move");
-        moveIA.Enable();
-        lookIA = InputSystem.actions.FindAction("Character/Look");
+        controller = GetComponent<CharacterController>();
+
         Cursor.lockState = CursorLockMode.Locked;
-        lookIA.Enable();
-        moveIA.started += StartMove;
-        moveIA.canceled += StopMove;
-        lookIA.started += StartLook;
-        lookIA.canceled += StopLook;
+        Cursor.visible = false;
+        standingCameraPos = transform.Find("StandingCamPos");
+        crouchingCameraPos = transform.Find("CrouchingCamPos");
+        isCrouching = false;
     }
 
-    private void StartMove(InputAction.CallbackContext ctx)
+    void Update()
     {
-        if (!moving) { moving = true;  StartCoroutine(MoveCoroutine()); }
-    }
-
-    private void StopMove(InputAction.CallbackContext ctx)
-    {
-        moving = false;
-    }
-
-    private IEnumerator MoveCoroutine()
-    {
-        while (moving == true)
+        Vector3 up = transform.TransformDirection(Vector3.up);
+        if (!Input.GetButton("Sprint") && Input.GetButtonDown("Crouch"))
         {
-            float mx = moveIA.ReadValue<Vector2>().x * 0.3f;
-            float my = moveIA.ReadValue<Vector2>().y * 0.3f;
-            charCont.Move(transform.TransformDirection(new Vector3(mx != 0 ? mx : 0, 0, my != 0 ? my : 0)) * 150f * Time.deltaTime);
-            yield return new WaitForSeconds(0.1f);
-        }
-        yield break;
-    }
-
-    private void StartLook(InputAction.CallbackContext ctx)
-    {
-        if (lcip == false) { lcip = true; StartCoroutine(LookCoroutine()); }
-    }
-
-    private void StopLook(InputAction.CallbackContext ctx)
-    {
-        StopCoroutine(LookCoroutine());
-        lcip = false;
-    }
-
-    private IEnumerator LookCoroutine()
-    {
-        while(lookIA.ReadValue<float>() != 0)
+            isCrouching = true;
+            controller.height = 1f;
+        } else if (Input.GetButtonUp("Crouch") && !Physics.Raycast(transform.position, up, 1))
         {
-            transform.Rotate(new Vector3(0, lookIA.ReadValue<float>() * 0.5f, 0));
-            yield return new WaitForEndOfFrame();
+            isCrouching = false;
+            controller.height = 2f;
         }
-        yield break;
+
+        if (isCrouching)
+        {
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, crouchingCameraPos.localPosition, crouchTransitionSpeed * Time.deltaTime);
+        }
+        else
+        {
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, standingCameraPos.localPosition, crouchTransitionSpeed * Time.deltaTime);
+        }
+
+
+        Look();
+        Move();
+    }
+
+    void Look()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
+
+        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void Move()
+    {
+        bool grounded = controller.isGrounded;
+
+        if (grounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        float speed = isCrouching ? crouchSpeed : (Input.GetButton("Sprint") ? sprintSpeed : walkSpeed);
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * speed * Time.deltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
