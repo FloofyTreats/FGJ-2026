@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
@@ -16,12 +18,16 @@ public class FirstPersonController : MonoBehaviour
     public float mouseSensitivity = 200f;
     public float maxLookAngle = 90f;
 
+    [Header("Miscellaneous")]
+    public TextMeshProUGUI captionText;
+
     private CharacterController controller;
     private Vector3 velocity;
     private float xRotation = 0f;
     private Transform standingCameraPos;
     private Transform crouchingCameraPos;
     private bool isCrouching;
+    private bool inUI;
 
     void Start()
     {
@@ -63,6 +69,11 @@ public class FirstPersonController : MonoBehaviour
 
     void Look()
     {
+        if (inUI)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -82,15 +93,40 @@ public class FirstPersonController : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float speed = isCrouching ? crouchSpeed : (Input.GetButton("Sprint") ? sprintSpeed : walkSpeed);
+        if(!inUI)
+        {
+            float speed = isCrouching ? crouchSpeed : (Input.GetButton("Sprint") ? sprintSpeed : walkSpeed);
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * speed * Time.deltaTime);
+            Vector3 move = transform.right * x + transform.forward * z;
+            controller.Move(move * speed * Time.deltaTime);
+        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+   }
+
+    public void ToggleInUI()
+    {
+        inUI = !inUI;
+        if(inUI)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public IEnumerator displayCaption(string text, float time)
+    {
+        captionText.text = text;
+        yield return new WaitForSeconds(time);
+        captionText.text = "";
     }
 }
