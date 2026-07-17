@@ -14,6 +14,8 @@ public class ToolboxInteractable : UIInteractable
     public Image toolboxClose;
     public Image manualOpen;
     public Image manualClose;
+    public AudioClip toolboxSound;
+    public AudioClip manualSound;
 
     private int currentStep = 0;
 
@@ -30,14 +32,17 @@ public class ToolboxInteractable : UIInteractable
             case 1:
                 toolboxOpen.enabled = true;
                 toolboxClose.enabled = false;
+                audioSource.PlayOneShot(toolboxSound);
                 break;
             case 2:
                 toolboxCanvas.enabled = false;
                 manualCanvas.enabled = true;
+                audioSource.PlayOneShot(manualSound);
                 break;
             case 3:
                 manualClose.enabled = false;
                 manualOpen.enabled = true;
+                audioSource.PlayOneShot(manualSound);
                 break;
             case 4:
                 isRadioTaken = true;

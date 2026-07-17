@@ -6,6 +6,7 @@ public class UIInteractable : Interactable
     public FirstPersonController controller;
     public Animator animator;
     public AudioSource audioSource;
+    public AudioClip interactSound;
 
     private void Start()
     {
@@ -18,6 +19,10 @@ public class UIInteractable : Interactable
     {
         controller.ToggleInUI();
         UI.enabled = true;
+        if(interactSound)
+        {
+            audioSource.PlayOneShot(interactSound);
+        }
     }
 
     private void Update()
