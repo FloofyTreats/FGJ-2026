@@ -28,6 +28,7 @@ public class FirstPersonController : MonoBehaviour
     private Transform crouchingCameraPos;
     private bool isCrouching;
     private bool inUI;
+    private bool locked;
 
     void Start()
     {
@@ -69,7 +70,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Look()
     {
-        if (inUI)
+        if (inUI || locked)
         {
             return;
         }
@@ -93,7 +94,7 @@ public class FirstPersonController : MonoBehaviour
             velocity.y = -2f;
         }
 
-        if(!inUI)
+        if(!inUI && !locked)
         {
             float speed = isCrouching ? crouchSpeed : (Input.GetButton("Sprint") ? sprintSpeed : walkSpeed);
 
@@ -121,6 +122,11 @@ public class FirstPersonController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    public void LockMovement()
+    {
+        locked = true;
     }
 
     public IEnumerator displayCaption(string text, float time)

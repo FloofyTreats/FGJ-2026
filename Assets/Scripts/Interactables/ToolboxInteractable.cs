@@ -41,7 +41,7 @@ public class ToolboxInteractable : UIInteractable
                 break;
             case 4:
                 isRadioTaken = true;
-                StartCoroutine(controller.displayCaption("Press ? to use the Sonic Radio", 5.0f));
+                StartCoroutine(controller.displayCaption("Press ? to use the Sonic Radio", 5f));
                 UI.enabled = false;
                 manualSprite.enabled = true;
                 openSprite.enabled = true;
