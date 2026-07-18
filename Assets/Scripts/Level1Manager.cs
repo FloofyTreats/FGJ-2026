@@ -8,6 +8,9 @@ public class Level1Manager : MonoBehaviour
     public static Level1Manager Instance { get; private set; }
 
     public bool powerOn = false;
+    public bool metronomeGot = false;
+    public bool soundboardGot = false;
+    public bool pianoGot = false;
     public GameObject lightsObject;
 
     private void Awake()
@@ -34,6 +37,11 @@ public class Level1Manager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void GetUpgrade(int whichUpgrade)
+    {
+
     }
 
     public void TurnPowerOn()
