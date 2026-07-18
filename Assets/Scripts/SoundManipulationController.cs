@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Events;
 
 public class SoundManipulationController : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class SoundManipulationController : MonoBehaviour
     AudioMixer currentAudioMixer;
 
     [SerializeField] AudioSource radioAudioSource;
+    [SerializeField] AudioSource tuningAudioSource;
     [SerializeField] AudioMixer radioAudioMixer;
+    [SerializeField] UnityEvent radioPowered;
 
 
     //[SerializeField] AudioSource zelda2TrackAudioSource;
@@ -17,10 +21,12 @@ public class SoundManipulationController : MonoBehaviour
 
     [SerializeField] AudioSelector audioSelector;
 
-    [SerializeField] Text PlaybackRateTextbox;
+    [SerializeField] TextMeshProUGUI PlaybackRateTextbox;
 
     float playbackSpeed = 1f;
     float volume = .5f;
+    bool tuning = false;
+    public bool powered = false;
 
     enum TypeOfSound 
     { 
@@ -32,22 +38,38 @@ public class SoundManipulationController : MonoBehaviour
 
     private void Awake()
     {
+        radioAudioSource.Stop();
         updatePlaybackSpeedUIText();
-        setRadioStatic();
     }
 
     void Update()
     {
+        if (Input.GetButtonDown("Debug1"))
+        {
+            Debug.Log("toggling power");
+            TogglePower();
+        }
         checkIfResetReversedAudioLoop();
     }
 
     public void setRadioStatic()
     {
+        if (!powered)
+        {
+            return;
+        }
         currentAudioSource = radioAudioSource;
         currentAudioMixer = radioAudioMixer;
         typeOfSound = TypeOfSound.staticNoise;
         if (radioAudioSource.isPlaying == false)
-        { radioAudioSource.UnPause(); }
+        {
+            radioAudioSource.UnPause();
+
+            if(radioAudioSource.isPlaying == false)
+            {
+                radioAudioSource.Play();
+            }
+        }
         audioSelector.pauseAllTracks();
 
         refreshPlayback();
@@ -55,11 +77,16 @@ public class SoundManipulationController : MonoBehaviour
 
     public void setNewFrequency(float frequency)
     {
+        if(!powered)
+        {
+            return;
+        }
+
         AudioSelection audioSelection = audioSelector.tryToGetNewAudioSource(frequency);
 
         if (audioSelection == null)
         {
-            //setRadioStatic();
+            setRadioStatic();
         }
         else
         {
@@ -155,13 +182,20 @@ public class SoundManipulationController : MonoBehaviour
 
     void refreshPlayback()
     {
-        currentAudioSource.volume = volume;
+        if(!powered)
+        {
+            return;
+        }
+
+        tuningAudioSource.Stop();
+        tuning = false;
 
         switch(typeOfSound)
         {
             case TypeOfSound.radioStation:
                 {
                     currentAudioSource.pitch = playbackSpeed;
+                    currentAudioSource.volume = volume;
                     //zelda2TrackAudioSource.pitch = playbackSpeed;
                     float pitchCorrection = 1f / playbackSpeed;
                     //zelda2TrackAudioMixer.SetFloat("MixerPitch", pitchCorrection);
@@ -176,4 +210,33 @@ public class SoundManipulationController : MonoBehaviour
         }
     }
 
+    void StopPlayback()
+    {
+        currentAudioSource.Stop();
+    }
+
+    public void TuneRadio()
+    {
+        if (tuning || !powered)
+        {
+            return;
+        }
+
+        tuning = true;
+
+        currentAudioSource.Pause();
+        tuningAudioSource.Play();
+    }
+    
+    public void TogglePower()
+    {
+        powered = !powered;
+
+        if(!powered)
+        {
+            StopPlayback();
+        }
+
+        radioPowered.Invoke();
+    }
 }

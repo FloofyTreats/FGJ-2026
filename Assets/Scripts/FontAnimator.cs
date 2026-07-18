@@ -17,6 +17,11 @@ public class FontAnimator : MonoBehaviour
         Func_PlayFontAnim();
     }
 
+    void OnEnable()
+    {
+        Func_PlayFontAnim();
+    }
+
     private void Update()
     {
         if(textObject.text == "" && !IsDone)

@@ -1,14 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.Events;
 
 public class RadioFrequencyController : MonoBehaviour
 {
     [SerializeField] FrequencySliderUIController slider;
     [SerializeField] SoundManipulationController soundManipulation;
     [SerializeField] DialController dialController;
-    [SerializeField] Text FrequencyUITextbox;
+    [SerializeField] TextMeshProUGUI FrequencyUITextbox;
     [SerializeField] SoundManipulationController soundManipulationController;
+    [SerializeField] UnityEvent frequencySet;
     float frequency; public float Frequency { get { return frequency; } }
     float timeUntilPullStation = 2f;
     bool triedToPullStation = true;
@@ -16,11 +19,12 @@ public class RadioFrequencyController : MonoBehaviour
     { 
         timeUntilPullStation = 2f;
         triedToPullStation = false;
+        soundManipulationController.TuneRadio();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        frequency = 90.0f;
+        frequency = 95.0f;
         updateFrequencyUIText();
         resetTimeUntilPullStation();
     }
@@ -37,9 +41,11 @@ public class RadioFrequencyController : MonoBehaviour
         }
     }
     
-    void tryToPullStation()
+    public void tryToPullStation()
     {
         triedToPullStation = true;
+
+        frequencySet.Invoke();
 
         soundManipulationController.setNewFrequency(frequency);
     }
@@ -58,7 +64,7 @@ public class RadioFrequencyController : MonoBehaviour
         frequency = 90 + (10 * (angle / 270));
         slider.updateSliderUIBasedOnFrequency(frequency);
         updateFrequencyUIText();
-        soundManipulationController.setRadioStatic();
+        //soundManipulationController.setRadioStatic();
 
         resetTimeUntilPullStation();
     }

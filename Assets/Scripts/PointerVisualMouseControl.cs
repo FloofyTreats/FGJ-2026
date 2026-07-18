@@ -38,7 +38,7 @@ public class PointerVisualMouseControl : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasTransform,
             pixelMousePos,
-            canvasCamera,
+            null,
             out Vector2 mousePos
             );
 

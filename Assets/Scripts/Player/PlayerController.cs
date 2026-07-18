@@ -21,6 +21,8 @@ public class FirstPersonController : MonoBehaviour
     [Header("Miscellaneous")]
     public TextMeshProUGUI captionText;
     public float stepInterval = 200f;
+    public GameObject radioUI;
+    public GameObject handCursor;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -29,6 +31,7 @@ public class FirstPersonController : MonoBehaviour
     private Transform crouchingCameraPos;
     private bool isCrouching;
     public bool inUI;
+    public bool radioActive;
     private bool locked;
     private AudioSource audioSource;
     private float untilNextStep;
@@ -57,6 +60,11 @@ public class FirstPersonController : MonoBehaviour
         {
             isCrouching = false;
             controller.height = 2f;
+        }
+
+        if((!inUI || (inUI && radioActive)) && Input.GetButtonDown("Radio"))
+        {
+            ToggleRadio();
         }
 
         if (isCrouching)
@@ -136,6 +144,15 @@ public class FirstPersonController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    public void ToggleRadio()
+    {
+        ToggleInUI();
+
+        radioActive = !radioActive;
+
+        radioUI.SetActive(radioActive);
     }
 
     public void LockMovement()

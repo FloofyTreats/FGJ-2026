@@ -11,6 +11,11 @@ public class UISpriteAnimation : MonoBehaviour
         Func_PlayUIAnim();
     }
 
+    private void OnEnable()
+    {
+        Func_PlayUIAnim();
+    }
+
     public Image m_Image;
 
     public Sprite[] m_SpriteArray;

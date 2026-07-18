@@ -39,7 +39,7 @@ public class DialController : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             buttonTrans,
             pixelMousePos,
-            canvasCamera,
+            null,
             out Vector2 mousePos
             );
 
@@ -60,7 +60,7 @@ public class DialController : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             buttonTrans,
             pixelMousePos,
-            canvasCamera,
+            null,
             out Vector2 mousePos
             );
 
@@ -76,7 +76,6 @@ public class DialController : MonoBehaviour
             angle += (180 - holdAngle);
 
         }
-        Debug.Log("Angle " +  angle);
         //angle += holdAngle;
     }
 
