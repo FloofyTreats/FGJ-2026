@@ -148,6 +148,16 @@ public class FirstPersonController : MonoBehaviour
 
     public void ToggleRadio()
     {
+        if (!Level1Manager.Instance.radioGot)
+        {
+            return;
+        }
+
+        if(captionText.text == "Press TAB to use Sonic Radio")
+        {
+            captionText.text = "";
+        }
+
         ToggleInUI();
 
         radioActive = !radioActive;

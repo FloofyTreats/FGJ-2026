@@ -17,7 +17,7 @@ public class AudioSelector : MonoBehaviour
         foreach (AudioSelection audioSelection in audioSelectionArray) 
         {
 
-            if (audioSelection.minFrequencyRange < frequency && audioSelection.maxFrequencyRange > frequency)
+            if ((audioSelection.minFrequencyRange < frequency && audioSelection.maxFrequencyRange > frequency))
             {
                 returnAudio = audioSelection;
                 audioSelection.radioAudioSource.Play();

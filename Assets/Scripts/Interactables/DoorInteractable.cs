@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 public class DoorInteractable : Interactable
 {
     public string nextLevel;
-    public bool locked = false;
+    public bool locked = true;
+    public RadioFrequencyController frequencyController;
+    public VolumeController volumeController;
+    public string validFrequency;
+    public float validVolume;
 
     private FirstPersonController controller;
     private ScreenFade screenFade;
@@ -25,6 +29,15 @@ public class DoorInteractable : Interactable
         {
             StartCoroutine("ChangeLevel");
         }
+    }
+
+    public void CheckRadioParameters()
+    {
+        bool validValues = frequencyController.Frequency.ToString("F1") == validFrequency && Mathf.Abs(validVolume - volumeController.Volume) < 0.05f;
+
+        Debug.Log("Volume: " + volumeController.Volume + ", Frequency: " + frequencyController.Frequency.ToString("F1"));
+
+        ToggleDoorLock(!validValues);
     }
 
     public void ToggleDoorLock(bool val)

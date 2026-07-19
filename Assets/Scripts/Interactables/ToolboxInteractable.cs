@@ -46,12 +46,21 @@ public class ToolboxInteractable : UIInteractable
                 break;
             case 4:
                 isRadioTaken = true;
-                StartCoroutine(controller.displayCaption("Press ? to use the Sonic Radio", 5f));
                 UI.enabled = false;
                 manualSprite.enabled = true;
                 openSprite.enabled = true;
                 closeSprite.enabled = false;
                 controller.ToggleInUI();
+
+                if(!Level1Manager.Instance.radioGot)
+                {
+                    Level1Manager.Instance.GetUpgrade(0);
+                }
+                else
+                {
+                    StartCoroutine(controller.displayCaption("Press TAB to use Sonic Radio", 5f));
+                }
+
                 break;
         }
         
