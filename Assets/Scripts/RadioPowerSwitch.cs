@@ -14,5 +14,7 @@ public class RadioPowerSwitch : MonoBehaviour
         on = !on;
 
         switchImage.m_SpriteArray = on ? onSprites : offSprites;
+
+        Level1Manager.Instance.ToggleLevelAudio();
     }
 }

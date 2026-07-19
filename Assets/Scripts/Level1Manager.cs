@@ -128,4 +128,16 @@ public class Level1Manager : MonoBehaviour
         powerOn = true;
         lightsObject.SetActive(true);
     }
+
+    public void ToggleLevelAudio()
+    {
+        if(levelAudio.isPlaying)
+        {
+            levelAudio.Pause();
+        }
+        else
+        {
+            levelAudio.Play();
+        }
+    }
 }
