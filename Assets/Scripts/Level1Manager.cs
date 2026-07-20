@@ -22,6 +22,9 @@ public class Level1Manager : MonoBehaviour
     public GameObject soundboardUI;
     public GameObject soundboardSprite;
 
+    public GameObject pianoUI;
+    public GameObject pianoSprite;
+
     public Sprite[] radioGotSprites;
     public string radioGotText;
     public Sprite[] metronomeGotSprites;
@@ -36,6 +39,8 @@ public class Level1Manager : MonoBehaviour
     public AudioClip coolSong;
     public SoundManipulationController soundManipulationController;
     public RadioPowerSwitch radioPowerSwitch;
+
+    public ScreenFade screenFade;
 
     private void Awake()
     {
@@ -54,6 +59,7 @@ public class Level1Manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        screenFade.FadeIn();
         if(metronomeGot)
         {
             EnableMetronome();
@@ -62,6 +68,11 @@ public class Level1Manager : MonoBehaviour
         if(soundboardGot)
         {
             EnableSoundboard();
+        }
+
+        if(pianoGot)
+        {
+            EnablePiano();
         }
     }
 
@@ -135,6 +146,14 @@ public class Level1Manager : MonoBehaviour
         soundboardSprite.SetActive(true);
     }
 
+    void EnablePiano()
+    {
+        pianoGot = true;
+
+        pianoUI.SetActive(true);
+        pianoSprite.SetActive(true);
+    }
+
     public void TurnPowerOn()
     {
         powerOn = true;
@@ -169,6 +188,7 @@ public class Level1Manager : MonoBehaviour
 
         controller.ToggleInUI();
         EnableSoundboard();
+        EnablePiano();
         levelAudio.clip = coolSong;
         levelAudio.Stop();
         levelAudio.Play();

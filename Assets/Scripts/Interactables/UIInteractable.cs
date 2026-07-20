@@ -36,7 +36,7 @@ public class UIInteractable : Interactable
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (UI.enabled && Input.GetButtonDown("Cancel"))
         {

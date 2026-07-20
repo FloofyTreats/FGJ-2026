@@ -27,6 +27,7 @@ public class SoundManipulationController : MonoBehaviour
     float volume = .5f;
     bool tuning = false;
     public bool powered = false;
+    public bool isReversed = false;
 
     enum TypeOfSound 
     { 
@@ -40,16 +41,6 @@ public class SoundManipulationController : MonoBehaviour
     {
         radioAudioSource.Stop();
         updatePlaybackSpeedUIText();
-    }
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Debug1"))
-        {
-            Debug.Log("toggling power");
-            TogglePower();
-        }
-        checkIfResetReversedAudioLoop();
     }
 
     public void setRadioStatic()
@@ -83,6 +74,17 @@ public class SoundManipulationController : MonoBehaviour
         }
 
         AudioSelection audioSelection = audioSelector.tryToGetNewAudioSource(frequency);
+        if(isReversed)
+        {
+            StartCoroutine(AudioClipReverse.CreateReversedCoroutine(currentAudioSource.clip, reversed =>
+            {
+                if (reversed == null) { return; }
+
+                currentAudioSource.clip = reversed;
+
+                isReversed = !isReversed;
+            }));
+        }
 
         if (audioSelection == null)
         {
@@ -115,14 +117,14 @@ public class SoundManipulationController : MonoBehaviour
         //if (zelda2TrackAudioSource.pitch >= 0)
         {
             playbackSpeed += .1f;
-            if (playbackSpeed > 2)
-            { playbackSpeed = 2; }
+            if (playbackSpeed > 4)
+            { playbackSpeed = 4; }
         }
         else
         {
             playbackSpeed -= .1f;
-            if (playbackSpeed < -2)
-            { playbackSpeed = -2; }
+            if (playbackSpeed < -4)
+            { playbackSpeed = -4; }
         }
         refreshPlayback();
     }
@@ -137,14 +139,14 @@ public class SoundManipulationController : MonoBehaviour
         //if (zelda2TrackAudioSource.pitch >= 0)
         {
             playbackSpeed -= .1f;
-            if (playbackSpeed < .5f)
-            { playbackSpeed = .5f; }
+            if (playbackSpeed < .1f)
+            { playbackSpeed = .1f; }
         }
         else
         {
             playbackSpeed += .1f;
-            if (playbackSpeed > -.5f)
-            { playbackSpeed = -.5f; }
+            if (playbackSpeed > -.1f)
+            { playbackSpeed = -.1f; }
         }
         refreshPlayback();
     }
@@ -155,7 +157,15 @@ public class SoundManipulationController : MonoBehaviour
         {
             return;
         }
-        playbackSpeed *= -1f;
+        StartCoroutine(AudioClipReverse.CreateReversedCoroutine(currentAudioSource.clip, reversed =>
+        {
+            if(reversed == null) { return; }
+
+            currentAudioSource.clip = reversed;
+            currentAudioSource.Play();
+
+            isReversed = !isReversed;
+        }));
         refreshPlayback();
     }
 
@@ -165,12 +175,9 @@ public class SoundManipulationController : MonoBehaviour
         { reversePlayback(); }
     }
 
-    public void setPlaybackSpeedFromSlider(float sliderValue)
-    { 
-        if (playbackSpeed >= 0)
-        { playbackSpeed = .5f + (sliderValue * 1.5f); }
-        else
-        { { playbackSpeed = -.5f + (sliderValue * -1.5f); } }
+    public void resetPlaybackSpeed()
+    {
+        playbackSpeed = 1.0f;
         refreshPlayback();
     }
 
@@ -214,9 +221,9 @@ public class SoundManipulationController : MonoBehaviour
                     currentAudioSource.pitch = playbackSpeed;
                     currentAudioSource.volume = volume;
                     //zelda2TrackAudioSource.pitch = playbackSpeed;
-                    float pitchCorrection = 1f / playbackSpeed;
+                    //float pitchCorrection = 1f / playbackSpeed;
                     //zelda2TrackAudioMixer.SetFloat("MixerPitch", pitchCorrection);
-                    currentAudioMixer.SetFloat("MixerPitch", pitchCorrection);
+                    //currentAudioMixer.SetFloat("MixerPitch", pitchCorrection);
                     updatePlaybackSpeedUIText();
                     break; 
                 }

@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 116434246}
   - component: {fileID: 116434248}
   - component: {fileID: 116434247}
+  - component: {fileID: 116434249}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -520,7 +521,7 @@ MonoBehaviour:
     We''ve
     unlocked some toys in the radio that you should feel free to play around with.
     We will post some of the art that didn''t make it on Discord! Feel free to stick
-    around and enjoy this fun song, too!'
+    around and enjoy this cool song, too!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
   m_sharedMaterial: {fileID: -8412785177239417575, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
@@ -600,10 +601,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116434245}
   m_CullTransparentMesh: 1
+--- !u!114 &116434249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116434245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46a147f7150ce4cb2d9315127663a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontAnimator
+  textObject: {fileID: 116434247}
+  fonts:
+  - {fileID: 11400000, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
+  - {fileID: 11400000, guid: c3fedd540344eb84aae9055a8a26bbc6, type: 2}
+  - {fileID: 11400000, guid: 622f73f9fb518e3448f97e74290e4c39, type: 2}
+  speed: 0.2
 --- !u!4 &121047661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f67dc9f0f037fa3468a3eb01a3f78082, type: 3}
   m_PrefabInstance: {fileID: 313332308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &132235070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3528059776881750987, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
+  m_PrefabInstance: {fileID: 2054167851}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &134268394
 PrefabInstance:
@@ -2645,6 +2669,7 @@ GameObject:
   - component: {fileID: 580928620}
   - component: {fileID: 580928622}
   - component: {fileID: 580928621}
+  - component: {fileID: 580928623}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2771,6 +2796,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580928619}
   m_CullTransparentMesh: 1
+--- !u!114 &580928623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580928619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46a147f7150ce4cb2d9315127663a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontAnimator
+  textObject: {fileID: 580928621}
+  fonts:
+  - {fileID: 11400000, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
+  - {fileID: 11400000, guid: c3fedd540344eb84aae9055a8a26bbc6, type: 2}
+  - {fileID: 11400000, guid: 622f73f9fb518e3448f97e74290e4c39, type: 2}
+  speed: 0.2
 --- !u!1 &585485584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6455,6 +6498,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 976e6b5e2980f7e40862a1afaa6f301b, type: 3}
+--- !u!1 &879239158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8173425583893557679, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
+  m_PrefabInstance: {fileID: 2054167851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &900484934
 Mesh:
   m_ObjectHideFlags: 0
@@ -6922,6 +6970,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4582311974133369782, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 920234613}
     - target: {fileID: 6220848672568991875, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
       propertyPath: m_Name
       value: FadeCanvas
@@ -6931,6 +6983,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+--- !u!114 &920234612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4582311974133369782, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+  m_PrefabInstance: {fileID: 920234611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78f3c7da4dd0f64d94268cee35ee993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!95 &920234613 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8858413760328195121, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+  m_PrefabInstance: {fileID: 920234611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &946983625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 74306d6d2fea4ab45b9a58b4d76b97d8, type: 3}
@@ -12028,6 +12096,7 @@ GameObject:
   - component: {fileID: 1784515483}
   - component: {fileID: 1784515485}
   - component: {fileID: 1784515484}
+  - component: {fileID: 1784515486}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -12077,17 +12146,17 @@ MonoBehaviour:
   m_text: 'Credits
 
 
-    FloofyTreats - Programming, 3D modeling
+    FloofyTreats - Lead programming, 3D modeling
 
-    Lavendew -
-    Puzzle design, SFX
+    Lavendew
+    - Lead puzzle design, 92.9 station
 
     Jet - Music, SFX
 
     Aria - Music
 
-    Pearbasket -
-    2D art, SFX, puzzle design
+    Pearbasket
+    - 2D art, SFX, 96.2 station
 
     linknivy - Programming
 
@@ -12172,6 +12241,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784515482}
   m_CullTransparentMesh: 1
+--- !u!114 &1784515486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784515482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46a147f7150ce4cb2d9315127663a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontAnimator
+  textObject: {fileID: 1784515484}
+  fonts:
+  - {fileID: 11400000, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
+  - {fileID: 11400000, guid: c3fedd540344eb84aae9055a8a26bbc6, type: 2}
+  - {fileID: 11400000, guid: 622f73f9fb518e3448f97e74290e4c39, type: 2}
+  speed: 0.2
 --- !u!43 &1787436785
 Mesh:
   m_ObjectHideFlags: 0
@@ -12415,6 +12502,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1897153529}
     m_Modifications:
+    - target: {fileID: 1030449729413677317, guid: 8be7bafc2a1d2154589abd5d873b928b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6140750921175220450, guid: 8be7bafc2a1d2154589abd5d873b928b, type: 3}
       propertyPath: m_Name
       value: UpgradeGetUI
@@ -14038,6 +14129,8 @@ MonoBehaviour:
   metronomeSprite: {fileID: 2054167856}
   soundboardUI: {fileID: 2054167853}
   soundboardSprite: {fileID: 2054167855}
+  pianoUI: {fileID: 879239158}
+  pianoSprite: {fileID: 132235070}
   radioGotSprites: []
   radioGotText: 
   metronomeGotSprites:
@@ -14053,9 +14146,10 @@ MonoBehaviour:
   upgradeGetUI: {fileID: 1823796379}
   controller: {fileID: 1566145950}
   youMadeItUI: {fileID: 1012432360}
-  coolSong: {fileID: 8300000, guid: 59529caffbd25b74cb029c59266c79a0, type: 3}
+  coolSong: {fileID: 8300000, guid: 95735d86b157d434eb0096bf07e375bb, type: 3}
   soundManipulationController: {fileID: 1870328857}
   radioPowerSwitch: {fileID: 1369123242}
+  screenFade: {fileID: 920234612}
 --- !u!4 &2019104082
 Transform:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class StarButtonInteractable : Interactable
             return;
         }
 
-        if (radioFrequencyController.Frequency.ToString("F1") == validFrequency && soundManipulationController.PlaybackSpeed < 0) {
+        if (radioFrequencyController.Frequency.ToString("F1") == validFrequency && soundManipulationController.isReversed) {
             UnlockDoor();
         }
     }

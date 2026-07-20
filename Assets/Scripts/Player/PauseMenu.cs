@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(Input.GetButtonDown("Cancel") && !controller.inUI) {
             Pause();

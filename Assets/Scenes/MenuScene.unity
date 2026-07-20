@@ -505,18 +505,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1283519143}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ToggleGallery
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &718391016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,6 +2240,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4582311974133369782, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2020051546}
     - target: {fileID: 6220848672568991875, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
       propertyPath: m_Name
       value: FadeCanvas
@@ -2277,6 +2269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78f3c7da4dd0f64d94268cee35ee993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!95 &2020051546 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8858413760328195121, guid: 99f894dd368cade45ac772beff7e7045, type: 3}
+  m_PrefabInstance: {fileID: 1842462486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2112650310
 GameObject:
   m_ObjectHideFlags: 0

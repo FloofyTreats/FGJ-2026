@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class ScreenFade : MonoBehaviour
 {
-    private Animator animator;
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    public Animator animator;
     public void FadeIn()
     {
         animator.Play("FadeIn");
