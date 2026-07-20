@@ -140,6 +140,10 @@ public class Level1Manager : MonoBehaviour
         powerOn = true;
         lightsObject.SetActive(true);
         levelAudio.clip = level2Music;
+        if(!soundManipulationController.powered)
+        {
+            levelAudio.Play();
+        }
     }
 
     public void ToggleLevelAudio()

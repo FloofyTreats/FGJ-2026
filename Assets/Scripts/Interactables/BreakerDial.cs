@@ -1,5 +1,3 @@
-using UnityEditor.Animations;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 

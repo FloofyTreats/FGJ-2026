@@ -114,15 +114,6 @@ public class FirstPersonController : MonoBehaviour
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
-            if (x > 0f || z > 0f) {
-                untilNextStep -= speed;
-
-                if(untilNextStep <= 0)
-                {
-                    PlayFootstep();
-                }
-            }
-
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
         }

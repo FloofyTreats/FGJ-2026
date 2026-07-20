@@ -1,20 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class NormalDoorInteractable : Interactable
 {
     public bool unlocked = false;
     public bool open = false;
 
-    private Animator animator;
     private AudioSource audioSource;
 
     private FirstPersonController controller;
+    private MeshRenderer meshRenderer;
+    private BoxCollider collider;
 
     private void Start()
     {
         controller = FindAnyObjectByType<FirstPersonController>();
-        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        collider = GetComponent<BoxCollider>();
     }
 
     public override void Interact()
@@ -25,10 +27,10 @@ public class NormalDoorInteractable : Interactable
         }
         else
         {
-            string animation = open ? "open_door" : "close_door";
-
-            animator.Play(animation);
             audioSource.Play();
+
+            meshRenderer.enabled = false;
+            collider.enabled = false;
         }
     }
 }

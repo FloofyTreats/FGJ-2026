@@ -519,8 +519,8 @@ MonoBehaviour:
 
     We''ve
     unlocked some toys in the radio that you should feel free to play around with.
-    Also, if you return to the menu, you can see some of the art that didn''t make
-    it into the game! Feel free to stick around and enjoy this fun song, too!'
+    We will post some of the art that didn''t make it on Discord! Feel free to stick
+    around and enjoy this fun song, too!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
   m_sharedMaterial: {fileID: -8412785177239417575, guid: 11891a0efaace9845848b296e5fa666b, type: 2}
@@ -7400,7 +7400,6 @@ GameObject:
   - component: {fileID: 1088204505}
   - component: {fileID: 1088204504}
   - component: {fileID: 1088204510}
-  - component: {fileID: 1088204509}
   - component: {fileID: 1088204508}
   m_Layer: 0
   m_Name: Door (1)
@@ -7599,28 +7598,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &1088204509
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088204503}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 860e2043ff2cc3244bd0cc8d01b3bc65, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1088204510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10633,7 +10610,7 @@ MonoBehaviour:
   radioFrequencyController: {fileID: 1320712379}
   soundManipulationController: {fileID: 1870328857}
   validFrequency: 92.9
-  door: {fileID: 0}
+  door: {fileID: 1088204510}
 --- !u!95 &1620278662
 Animator:
   serializedVersion: 7
@@ -10748,7 +10725,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: c7a41a2124d44d64c9073e4508c3e3c6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 78c113679813556479610275b1ec961f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -14049,7 +14026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   powerOn: 0
   radioGot: 1
-  metronomeGot: 1
+  metronomeGot: 0
   soundboardGot: 0
   pianoGot: 0
   levelAudio: {fileID: 2019104083}
@@ -14076,7 +14053,7 @@ MonoBehaviour:
   upgradeGetUI: {fileID: 1823796379}
   controller: {fileID: 1566145950}
   youMadeItUI: {fileID: 1012432360}
-  coolSong: {fileID: 8300000, guid: fde9c43669afa9242ae91c33b673c1ee, type: 3}
+  coolSong: {fileID: 8300000, guid: 59529caffbd25b74cb029c59266c79a0, type: 3}
   soundManipulationController: {fileID: 1870328857}
   radioPowerSwitch: {fileID: 1369123242}
 --- !u!4 &2019104082
@@ -14815,14 +14792,6 @@ PrefabInstance:
     - target: {fileID: 1876718314734232339, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079735361880899755, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
-      propertyPath: maxFrequencyRange
-      value: 93
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079735361880899755, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
-      propertyPath: minFrequencyRange
-      value: 92.8
       objectReference: {fileID: 0}
     - target: {fileID: 5092979695800642299, guid: 8f312d184c8204c4498701e4f2ee2887, type: 3}
       propertyPath: m_AnchorMax.x
