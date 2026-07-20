@@ -6,7 +6,7 @@ public class StarButtonInteractable : Interactable
     public RadioFrequencyController radioFrequencyController;
     public SoundManipulationController soundManipulationController;
     public string validFrequency;
-    public GameObject door;
+    public NormalDoorInteractable door;
     
     private bool unlocked = false;
     private AudioSource audioSource;
@@ -36,6 +36,7 @@ public class StarButtonInteractable : Interactable
     public void UnlockDoor()
     {
         unlocked = true;
-
+        Level1Manager.Instance.EndDemo();
+        door.unlocked = true;
     }
 }

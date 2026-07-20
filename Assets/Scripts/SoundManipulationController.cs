@@ -107,7 +107,11 @@ public class SoundManipulationController : MonoBehaviour
 
     public void increasePlaybackSpeed()
     {
-        if(playbackSpeed >= 0f)
+        if (!powered)
+        {
+            return;
+        }
+        if (playbackSpeed >= 0f)
         //if (zelda2TrackAudioSource.pitch >= 0)
         {
             playbackSpeed += .1f;
@@ -125,7 +129,11 @@ public class SoundManipulationController : MonoBehaviour
 
     public void decreasePlaybackSpeed()
     {
-        if(playbackSpeed >= 0)
+        if (!powered)
+        {
+            return;
+        }
+        if (playbackSpeed >= 0)
         //if (zelda2TrackAudioSource.pitch >= 0)
         {
             playbackSpeed -= .1f;
@@ -143,6 +151,10 @@ public class SoundManipulationController : MonoBehaviour
 
     public void reversePlayback()
     {
+        if(!powered)
+        {
+            return;
+        }
         playbackSpeed *= -1f;
         refreshPlayback();
     }
@@ -164,6 +176,11 @@ public class SoundManipulationController : MonoBehaviour
 
     void checkIfResetReversedAudioLoop()
     {
+        if(!powered)
+        {
+            return;
+        }
+
         if(playbackSpeed < 0)
         //if(zelda2TrackAudioSource.pitch < 0)
         {

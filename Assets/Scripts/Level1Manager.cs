@@ -12,6 +12,7 @@ public class Level1Manager : MonoBehaviour
     public AudioSource levelAudio;
     public AudioSource sfxAudio;
     public AudioClip itemGetSound;
+    public AudioClip level2Music;
 
     public GameObject lightsObject;
     
@@ -31,6 +32,11 @@ public class Level1Manager : MonoBehaviour
     public GameObject upgradeGetUI;
     public FirstPersonController controller;
 
+    public GameObject youMadeItUI;
+    public AudioClip coolSong;
+    public SoundManipulationController soundManipulationController;
+    public RadioPowerSwitch radioPowerSwitch;
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -48,7 +54,15 @@ public class Level1Manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(metronomeGot)
+        {
+            EnableMetronome();
+        }
+
+        if(soundboardGot)
+        {
+            EnableSoundboard();
+        }
     }
 
     // Update is called once per frame
@@ -125,6 +139,7 @@ public class Level1Manager : MonoBehaviour
     {
         powerOn = true;
         lightsObject.SetActive(true);
+        levelAudio.clip = level2Music;
     }
 
     public void ToggleLevelAudio()
@@ -137,5 +152,22 @@ public class Level1Manager : MonoBehaviour
         {
             levelAudio.Play();
         }
+    }
+
+    public void EndDemo()
+    {
+        if (soundManipulationController.powered)
+        {
+            soundManipulationController.TogglePower();
+            Level1Manager.Instance.ToggleLevelAudio();
+            radioPowerSwitch.switchImage.m_SpriteArray = radioPowerSwitch.offSprites;
+        }
+
+        controller.ToggleInUI();
+        EnableSoundboard();
+        levelAudio.clip = coolSong;
+        levelAudio.Stop();
+        levelAudio.Play();
+        youMadeItUI.SetActive(true);
     }
 }

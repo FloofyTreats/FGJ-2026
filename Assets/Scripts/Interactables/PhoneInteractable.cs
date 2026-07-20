@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 
 public class PhoneInteractable : UIInteractable
 {
@@ -41,13 +42,6 @@ public class PhoneInteractable : UIInteractable
         else
         {
             int sequenceLen = currentSequence.Length;
-            if (sequenceLen == 6) {
-                currentSequence = "";
-                firstPart.text = "";
-                secondPart.text = "";
-                thirdPart.text = "";
-                sequenceLen = 0;
-            }
 
             if(sequenceLen < 2)
             {
@@ -66,14 +60,42 @@ public class PhoneInteractable : UIInteractable
             audioSource.PlayOneShot(buttonSounds[buttonIndex]);
             currentSequence += value;
 
-            if (currentSequence.Length == 6 && currentSequence == correctSequence) {
-                LockSequence();
+            if (currentSequence.Length == 6) {
+                if(currentSequence == correctSequence)
+                {
+                    LockSequence();
+                }
+                else
+                {
+                    currentSequence = "";
+                    firstPart.text = "";
+                    secondPart.text = "";
+                    thirdPart.text = "";
+                    sequenceLen = 0;
+                }
             }
         }
     }
 
     public void LockSequence()
     {
+        StartCoroutine(PlayCorrectNotes());
         isLockedIn = true;
+    }
+
+    IEnumerator PlayCorrectNotes()
+    {
+        yield return new WaitForSeconds(0.5f);
+        audioSource.PlayOneShot(buttonSounds[1]);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(buttonSounds[8]);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(buttonSounds[3]);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(buttonSounds[8]);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(buttonSounds[10]);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.PlayOneShot(buttonSounds[3]);
     }
 }
